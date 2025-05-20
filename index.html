@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paste | Coding-site</title>
+  <title>Create Paste | Coding-site</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -59,73 +56,79 @@
       font-size: 1.5em;
       cursor: pointer;
     }
-    .paste-section {
+    .create-section {
       max-width: 1200px;
       margin: 40px auto;
       padding: 0 20px;
+    }
+    .create-section h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .code-input {
+      margin-bottom: 30px;
+    }
+    .code-input textarea {
+      width: 100%;
+      min-height: 300px;
+      padding: 15px;
+      font-family: 'Courier New', monospace;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      resize: vertical;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .settings {
       display: grid;
-      grid-template-columns: 3fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
-    .paste-content {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      padding: 20px;
+    .setting-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .paste-content h1 {
-      font-size: 1.8em;
-      margin-bottom: 15px;
+    .setting-group label {
+      font-weight: 600;
       color: #2c3e50;
     }
-    .toolbar {
+    .setting-group select,
+    .setting-group input[type="text"],
+    .setting-group input[type="password"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 0.95em;
+      background-color: #fff;
+    }
+    .setting-group input[type="radio"] {
+      margin-right: 5px;
+    }
+    .setting-group .radio-group {
       display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 15px;
       flex-wrap: wrap;
     }
-    .toolbar button {
-      padding: 8px 20px;
+    .submit-button {
+      display: block;
+      margin: 30px auto;
+      padding: 15px 40px;
       background-color: #3498db;
       color: white;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 50px;
       border: none;
-      border-radius: 5px;
       cursor: pointer;
-      font-size: 0.9em;
       transition: background-color 0.3s, transform 0.2s;
       touch-action: manipulation;
     }
-    .toolbar button:hover {
+    .submit-button:hover {
       background-color: #2980b9;
-      transform: translateY(-2px);
-    }
-    pre code {
-      font-family: 'Courier New', monospace;
-      font-size: 0.95em;
-      display: block;
-      padding: 15px;
-      border-radius: 5px;
-      background-color: #2d2d2d;
-      overflow-x: auto;
-    }
-    .metadata {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-    }
-    .metadata h3 {
-      font-size: 1.3em;
-      margin-bottom: 15px;
-      color: #2c3e50;
-    }
-    .metadata p {
-      font-size: 0.9em;
-      margin-bottom: 10px;
-      color: #555;
-    }
-    .metadata p strong {
-      color: #1f2a44;
+      transform: translateY(-3px);
     }
     footer {
       background-color: #1f2a44;
@@ -159,34 +162,39 @@
       .hamburger {
         display: block;
       }
-      .paste-section {
-        grid-template-columns: 1fr;
-      }
-      .paste-content h1 {
+      .create-section h1 {
         font-size: 1.5em;
       }
-      pre code {
-        font-size: 0.85em;
+      .code-input textarea {
+        min-height: 200px;
+        font-size: 0.9em;
       }
-      .metadata {
-        margin-top: 20px;
+      .settings {
+        grid-template-columns: 1fr;
+      }
+      .submit-button {
+        padding: 12px 30px;
+        font-size: 0.9em;
       }
     }
     @media (max-width: 480px) {
-      .paste-content h1 {
+      .create-section h1 {
         font-size: 1.3em;
       }
-      .toolbar button {
-        padding: 6px 15px;
-        font-size: 0.8em;
+      .code-input textarea {
+        min-height: 150px;
+        font-size: 0.85em;
       }
-      pre code {
-        font-size: 0.8em;
+      .setting-group label {
+        font-size: 0.9em;
       }
-      .metadata h3 {
-        font-size: 1.1em;
+      .setting-group select,
+      .setting-group input[type="text"],
+      .setting-group input[type="password"] {
+        font-size: 0.9em;
       }
-      .metadata p {
+      .submit-button {
+        padding: 10px 25px;
         font-size: 0.85em;
       }
     }
@@ -205,35 +213,78 @@
     </div>
   </nav>
 
-  <section class="paste-section">
-    <div class="paste-content">
-      <h1>My Python Snippet</h1>
-      <div class="toolbar">
-        <button onclick="downloadPaste()">Download</button>
-        <button onclick="copyPaste()">Copy</button>
-        <button onclick="sharePaste()">Share</button>
+  <section class="create-section">
+    <h1>Create a New Paste</h1>
+    <div class="code-input">
+      <textarea placeholder="Paste your code here..." required></textarea>
+    </div>
+    <div class="settings">
+      <div class="setting-group">
+        <label for="category">Category</label>
+        <select id="category">
+          <option value="snippet" selected>Snippet</option>
+          <option value="tutorial">Tutorial</option>
+          <option value="debug">Debug</option>
+          <option value="other">Other</option>
+        </select>
       </div>
-      <pre><code class="language-python">
-def hello_world():
-    print("Hello, Coding-site!")
-    for i in range(5):
-        print(f"Count: {i}")
-
-if __name__ == "__main__":
-    hello_world()
-      </code></pre>
+      <div class="setting-group">
+        <label for="tags">Tags (comma-separated)</label>
+        <input type="text" id="tags" value="code, programming" placeholder="e.g., python, javascript">
+        <datalist id="tag-suggestions">
+          <option value="python">
+          <option value="javascript">
+          <option value="java">
+          <option value="html">
+          <option value="css">
+        </datalist>
+      </div>
+      <div class="setting-group">
+        <label for="syntax">Syntax Highlighting</label>
+        <select id="syntax">
+          <option value="text" selected>Plain Text</option>
+          <option value="python">Python</option>
+          <option value="javascript">JavaScript</option>
+          <option value="java">Java</option>
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label for="expiration">Paste Expiration</label>
+        <select id="expiration">
+          <option value="10minutes">10 Minutes</option>
+          <option value="1day">1 Day</option>
+          <option value="1week">1 Week</option>
+          <option value="1month">1 Month</option>
+          <option value="3months">3 Months</option>
+          <option value="6months">6 Months</option>
+          <option value="1year">1 Year</option>
+          <option value="lifetime" selected>Lifetime</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label>Paste Exposure</label>
+        <div class="radio-group">
+          <label><input type="radio" name="exposure" value="public" checked> Public</label>
+          <label><input type="radio" name="exposure" value="unlisted"> Unlisted</label>
+          <label><input type="radio" name="exposure" value="private"> Private</label>
+        </div>
+      </div>
+      <div class="setting-group">
+        <label for="folder">Folder</label>
+        <select id="folder">
+          <option value="general" selected>General</option>
+          <option value="project">Project</option>
+          <option value="new">Create New Folder</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label for="password">Password (Optional)</label>
+        <input type="password" id="password" placeholder="Enter password (optional)">
+      </div>
     </div>
-    <div class="metadata">
-      <h3>Paste Details</h3>
-      <p><strong>Posted:</strong> May 21, 2025, 12:36 AM</p>
-      <p><strong>Category:</strong> Snippet</p>
-      <p><strong>Tags:</strong> code, programming, python</p>
-      <p><strong>Syntax:</strong> Python</p>
-      <p><strong>Expiration:</strong> Lifetime</p>
-      <p><strong>Exposure:</strong> Public</p>
-      <p><strong>Folder:</strong> General</p>
-      <p><strong>Password:</strong> None</p>
-    </div>
+    <button class="submit-button">Submit Paste</button>
   </section>
 
   <footer>
@@ -242,29 +293,16 @@ if __name__ == "__main__":
   </footer>
 
   <script>
-    // Initialize Highlight.js
-    hljs.highlightAll();
-
-    // Hamburger menu toggle
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('active');
     });
 
-    // Placeholder functions for toolbar actions
-    function downloadPaste() {
-      alert('Download feature coming soon!');
-    }
-    function copyPaste() {
-      const code = document.querySelector('code').textContent;
-      navigator.clipboard.writeText(code).then(() => {
-        alert('Code copied to clipboard!');
-      });
-    }
-    function sharePaste() {
-      alert('Share feature coming soon!');
-    }
+    const tagsInput = document.querySelector('#tags');
+    tagsInput.addEventListener('input', () => {
+      tagsInput.setAttribute('list', 'tag-suggestions');
+    });
   </script>
 </body>
 </html>
